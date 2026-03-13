@@ -137,7 +137,7 @@ export default function TutorialPanel({
     <div className="bg-white rounded-2xl shadow-md p-2 sm:p-4 md:p-5 flex flex-col justify-between min-h-[200px] sm:min-h-[250px] md:min-h-[350px]">
       {/* Speech bubble */}
       <div className="flex items-start gap-1 sm:gap-2 md:gap-3">
-        <div className="relative bg-gray-100 rounded-2xl p-3 sm:p-4 md:p-6 flex-1 text-black text-xs sm:text-sm md:text-lg leading-relaxed">
+        <div className="relative bg-gray-100 rounded-2xl p-3 sm:p-3 md:p-6 flex-1 text-black text-xs sm:text-sm md:text-lg leading-relaxed">
           {STEPS[step]}
 
           <div
@@ -148,7 +148,10 @@ export default function TutorialPanel({
         </div>
 
         <div className="flex-shrink-0">
-          <img src={Mascot} className="w-16 h-24 sm:w-20 sm:h-30 md:w-30 md:h-40" />
+          <img
+            src={Mascot}
+            className="w-16 h-24 sm:w-20 sm:h-30 md:w-30 md:h-40"
+          />
         </div>
       </div>
 

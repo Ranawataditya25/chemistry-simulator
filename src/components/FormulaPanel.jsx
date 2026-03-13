@@ -39,7 +39,7 @@ function Frac({ num, den }) {
 
 // Inline KaTeX — renders inline (not block) so it sits in a flex row
 function InlineTex({ math }) {
-  return <TeX math={math} block={false}/>;
+  return <TeX math={math} block={false} />;
 }
 
 export default function FormulaPanel({
@@ -62,7 +62,7 @@ export default function FormulaPanel({
   const showLaw = step >= 4;
 
   return (
-    <div className="bg-white rounded-2xl shadow-md p-2 sm:p-4 md:p-5 space-y-2 sm:space-y-4 overflow-x-auto text-xs sm:text-sm md:text-[17px] min-h-[200px] sm:min-h-[250px] md:min-h-[350px]">
+    <div className="bg-white rounded-2xl shadow-md p-1 sm:p-3 md:p-4 lg:p-5 space-y-2 sm:space-y-4 overflow-x-auto text-sm sm:text-base md:text-lg min-h-[200px] sm:min-h-[250px] md:min-h-[350px]">
       {/* ── Row 1: Main equation + inline boxes ─────────────────── */}
       {/* Line 1a: LaTeX main formula */}
       <div className="text-left">
@@ -72,7 +72,7 @@ export default function FormulaPanel({
       </div>
 
       {/* Line 1b: filled-in numeric row */}
-      <div className="flex items-center gap-x-1 text-lg sm:text-xl whitespace-nowrap">
+      <div className="flex items-center gap-1 text-sm sm:text-base md:text-lg whitespace-nowrap">
         <span>Rate =</span>
         {showK ? <Box value={k.toFixed(3)} /> : <Box value="?" orange />}
         <span>= −</span>
@@ -111,7 +111,7 @@ export default function FormulaPanel({
       </div>
       {/* Line 2b: expanded values (when revealed) */}
       {showHalf && (
-        <div className="flex items-center gap-1 text-gray-700 text-xs sm:text-sm -mt-2 whitespace-nowrap">
+        <div className="flex items-center gap-1 text-sm sm:text-base md:text-lg whitespace-nowrap">
           <Box value={half.toFixed(2)} />
           <span>=</span>
           <Box value={c1.toFixed(2)} />
@@ -129,7 +129,7 @@ export default function FormulaPanel({
       </div>
       {/* Line 3b: expanded values (when revealed) */}
       {showLaw && (
-        <div className="flex items-center gap-1 text-gray-700 text-xs sm:text-sm -mt-2 whitespace-nowrap">
+        <div className="flex items-center gap-1 text-sm sm:text-base md:text-lg whitespace-nowrap">
           <Box value={k.toFixed(3)} />
           <span>=</span>
           <Box value={k.toFixed(3)} />

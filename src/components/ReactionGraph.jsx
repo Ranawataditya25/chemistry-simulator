@@ -55,7 +55,7 @@ function ArrowBtn({ dir, onClick, disabled }) {
 }
 
 const CustomXTick = ({ x, y, payload }) => (
-  <text x={x} y={y + 14} textAnchor="middle" fontSize={8} fill="#64748b">
+  <text x={x} y={y + 14} textAnchor="middle" fontSize={6} fill="#64748b">
     {Number.isInteger(payload.value)
       ? `${payload.value}.0s`
       : `${payload.value}s`}
@@ -63,7 +63,7 @@ const CustomXTick = ({ x, y, payload }) => (
 );
 
 const CustomYTick = ({ x, y, payload }) => (
-  <text x={x - 2} y={y + 3} textAnchor="end" fontSize={8} fill="#64748b">
+  <text x={x - 2} y={y + 3} textAnchor="end" fontSize={6} fill="#64748b">
     {payload.value.toFixed(2)}
   </text>
 );
@@ -123,19 +123,18 @@ export default function ReactionGraph({
     { time: t2, A: c2, B: c1 - c2 },
   ];
 
-  const chartData = showSim ? trace : showLines ? staticData : [{ time: t1, A: c1, B: 0 }];
+  const chartData = showSim
+    ? trace
+    : showLines
+      ? staticData
+      : [{ time: t1, A: c1, B: 0 }];
 
   // Controls are only active at their respective step; frozen after that
   const isStep0 = step === 0;
   const ctrlLocked = step > 1; // step 2+ → all arrows disabled
 
   // Y control: step 0 → c1, step 1 → c2, else frozen (show last active value)
-  const yVal =
-  running && simA !== undefined
-    ? simA
-    : isStep0
-    ? c1
-    : c2;
+  const yVal = running && simA !== undefined ? simA : isStep0 ? c1 : c2;
   const yOnChange = isStep0 ? onC1Change : onC2Change;
   const yMin = isStep0 ? 0.2 : 0.0;
   const yMax = isStep0 ? 1.0 : parseFloat((c1 - 0.1).toFixed(2));
@@ -232,25 +231,29 @@ export default function ReactionGraph({
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 flex flex-col min-h-[200px] sm:min-h-[250px] md:min-h-[350px]">
-      <h2 className="font-semibold text-gray-700 mb-1 text-sm sm:text-base text-center">
+    <div className="bg-white rounded-2xl shadow-md p-1 sm:p-3 md:p-4 lg:p-5 flex flex-col min-h-[200px] sm:min-h-[250px] md:min-h-[350px]">
+      <h2 className="font-semibold text-gray-700 mb-0 text-sm sm:text-base text-center">
         Concentration vs Time
       </h2>
 
-      <div className="flex items-stretch gap-0 flex-1 mt-10">
+      <div className="flex items-stretch gap-0 flex-1 mt-1 sm:mt-3 md:mt-4 lg:mt-5">
         {/* Y-axis control */}
-        <div className="flex flex-col items-center justify-center gap-1 w-10 shrink-0 select-none">
+        <div className="flex flex-col items-center justify-center gap-1 w-8 sm:w-10 shrink-0 select-none">
           <ArrowBtn
             dir="up"
             onClick={handleYUp}
             disabled={ctrlLocked || yVal >= yMax}
           />
           <div className="text-center leading-snug">
-            <p className="text-gray-500 text-[10px] font-medium">[A]</p>
-            <p className="text-orange-500 text-[10px] font-bold">
+            <p className="text-gray-500 text-[8px] sm:text-[10px] font-medium">
+              [A]
+            </p>
+            <p className="text-orange-500 text-[8px] sm:text-[10px] font-bold">
               {yVal.toFixed(2)}
             </p>
-            <p className="text-orange-500 text-[10px] font-bold">M</p>
+            <p className="text-orange-500 text-[8px] sm:text-[10px] font-bold">
+              M
+            </p>
           </div>
           <ArrowBtn
             dir="down"
@@ -260,11 +263,11 @@ export default function ReactionGraph({
         </div>
 
         {/* Recharts */}
-        <div className="flex-1 h-[80px] sm:h-[100px] md:h-[140px] lg:h-[200px]">
+        <div className="flex-1 h-[120px] sm:h-[140px] md:h-[180px] lg:h-[200px]">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={chartData}
-              margin={{ top: 10, right: 12, bottom: 6, left: 0 }}
+              margin={{ top: 8, right: 8, bottom: 4, left: 0 }}
             >
               <CartesianGrid stroke="#f0f4f8" vertical={false} />
 
@@ -286,7 +289,7 @@ export default function ReactionGraph({
                 tick={<CustomYTick />}
                 stroke="#64748b"
                 strokeWidth={1.5}
-                width={28}
+                width={24}
                 tickLine={{ stroke: "#cbd5e1", strokeWidth: 1 }}
               />
 
@@ -296,7 +299,14 @@ export default function ReactionGraph({
                   <Line
                     dataKey="A"
                     stroke="transparent"
-                    dot={<circle r={5} fill="#3b82f6" stroke="white" strokeWidth={1.5} />}
+                    dot={
+                      <circle
+                        r={5}
+                        fill="#3b82f6"
+                        stroke="white"
+                        strokeWidth={1.5}
+                      />
+                    }
                     activeDot={false}
                   />
                   <ReferenceLine
@@ -341,13 +351,13 @@ export default function ReactionGraph({
       </div>
 
       {/* X-axis / time control */}
-      <div className="flex items-center justify-center gap-2 mt-1 select-none">
+      <div className="flex items-center justify-center gap-2 mt-0.5 sm:mt-1 select-none">
         <ArrowBtn
           dir="left"
           onClick={handleXLeft}
           disabled={ctrlLocked || xVal <= xMin}
         />
-        <span className="text-sm font-medium text-gray-700">
+        <span className="text-xs sm:text-sm font-medium text-gray-700">
           Time:{" "}
           <span className="text-cyan-500 font-bold">
             {displayTime.toFixed(1)} s
@@ -360,7 +370,7 @@ export default function ReactionGraph({
         />
       </div>
 
-      <p className="text-[10px] text-gray-400 text-center mt-0.5 px-2 truncate">
+      <p className="text-[8px] sm:text-[10px] text-gray-400 text-center mt-0 sm:mt-0.5 px-2 truncate">
         {settingLabel}
       </p>
     </div>

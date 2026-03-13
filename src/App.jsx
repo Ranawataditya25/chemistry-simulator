@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
-import Navbar            from "./components/Navbar";
-import Beaker            from "./components/Beaker";
-import ReactionGraph     from "./components/ReactionGraph";
+import Navbar from "./components/Navbar";
+import Beaker from "./components/Beaker";
+import ReactionGraph from "./components/ReactionGraph";
 import ConcentrationBars from "./components/ConcentrationBars";
-import FormulaPanel      from "./components/FormulaPanel";
-import TutorialPanel     from "./components/TutorialPanel";
+import FormulaPanel from "./components/FormulaPanel";
+import TutorialPanel from "./components/TutorialPanel";
 
 import useSimulation from "./simulation/useSimulation";
-import LandscapeWarning from "./components/LandscapeWarning"
+import LandscapeWarning from "./components/LandscapeWarning";
 
 export default function App() {
   const sim = useSimulation();
@@ -16,20 +16,17 @@ export default function App() {
   const [step, setStep] = useState(0);
 
   // Step 0: user sets c1 and t1 (locked after step 0)
-  const [c1, setC1] = useState(0.80);
+  const [c1, setC1] = useState(0.8);
   const [t1, setT1] = useState(0.0);
 
   // Step 1: user sets c2 and t2 (locked after step 1)
-  const [c2, setC2] = useState(0.00);
+  const [c2, setC2] = useState(0.0);
   const [t2, setT2] = useState(10.0);
 
   const dc = c2 - c1;
-const dt = t2 - t1;
+  const dt = t2 - t1;
 
-const k =
-  dt !== 0
-    ? Math.abs(dc / dt)
-    : 0;
+  const k = dt !== 0 ? Math.abs(dc / dt) : 0;
 
   useEffect(() => {
     if (step < 5) sim.reset();
@@ -51,15 +48,9 @@ const k =
   // sim: live sim.A, sim.B
   // Concentration bars display logic
 
-const displayA =
-  sim.running || sim.finished
-    ? sim.A
-    : c1;
+  const displayA = sim.running || sim.finished ? sim.A : c1;
 
-const displayB =
-  sim.running || sim.finished
-    ? sim.B
-    : 0;
+  const displayB = sim.running || sim.finished ? sim.B : 0;
 
   const handleStartSim = () => {
     setStep(5);
@@ -67,8 +58,8 @@ const displayB =
   };
 
   const handleReplay = () => {
-  sim.startWith(c1, k, t1, t2);
-};
+    sim.startWith(c1, k, t1, t2);
+  };
 
   const handleSetStep = (s) => {
     if (s < 5) sim.reset();
@@ -77,20 +68,26 @@ const displayB =
 
   // Controls are only editable at their respective step
   // step 0 → c1/t1 editable; step 1 → c2/t2 editable; step 2+ → frozen
-  const handleC1Change = (v) => { if (step === 0) setC1(v); };
-  const handleT1Change = (v) => { if (step === 0) setT1(v); };
-  const handleC2Change = (v) => { if (step === 1) setC2(v); };
-  const handleT2Change = (v) => { if (step === 1) setT2(v); };
+  const handleC1Change = (v) => {
+    if (step === 0) setC1(v);
+  };
+  const handleT1Change = (v) => {
+    if (step === 0) setT1(v);
+  };
+  const handleC2Change = (v) => {
+    if (step === 1) setC2(v);
+  };
+  const handleT2Change = (v) => {
+    if (step === 1) setT2(v);
+  };
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col">
       <LandscapeWarning />
       <Navbar />
 
-      <div className="flex-1 max-w-6xl mx-auto w-full px-1 sm:px-3 md:px-5 pt-2 pb-1 sm:pt-4 sm:pb-2 md:pt-6 md:pb-4 space-y-2 sm:space-y-4 md:space-y-7 flex flex-col">
-
+      <div className="flex-1 max-w-6xl mx-auto w-full px-1 sm:px-3 md:px-5 pt-2 pb-1 sm:pt-2 sm:pb-2 md:pt-6 md:pb-4 space-y-2 sm:space-y-2 md:space-y-7 flex flex-col">
         <div className="grid grid-cols-3 gap-0.5 sm:gap-1 md:gap-2 lg:gap-4 flex-shrink-0">
-
           {/* Beaker: shows c1-locked dots, converts dark-blue → red during sim */}
           <Beaker
             A={beakerA}
@@ -104,29 +101,31 @@ const displayB =
             simA={sim.running ? sim.A : undefined}
             simB={sim.running ? sim.B : undefined}
             running={sim.running}
-            c1={c1} t1={t1} onC1Change={handleC1Change} onT1Change={handleT1Change}
-            c2={c2} t2={t2} onC2Change={handleC2Change} onT2Change={handleT2Change}
+            c1={c1}
+            t1={t1}
+            onC1Change={handleC1Change}
+            onT1Change={handleT1Change}
+            c2={c2}
+            t2={t2}
+            onC2Change={handleC2Change}
+            onT2Change={handleT2Change}
           />
 
           <ConcentrationBars A={displayA} B={displayB} />
-
         </div>
 
         <div className="grid grid-cols-2 gap-0.5 sm:gap-1 md:gap-2 lg:gap-4 flex-shrink-0">
-
           <FormulaPanel step={step} c1={c1} t1={t1} c2={c2} t2={t2} />
 
           <TutorialPanel
-           k={k}
+            k={k}
             step={step}
             setStep={handleSetStep}
             onStartSim={handleStartSim}
             running={sim.running}
             onReplay={handleReplay}
           />
-
         </div>
-
       </div>
     </div>
   );
