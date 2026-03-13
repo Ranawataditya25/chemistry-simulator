@@ -87,9 +87,9 @@ const displayB =
       <LandscapeWarning />
       <Navbar />
 
-      <div className="flex-1 max-w-6xl mx-auto w-full px-3 sm:px-5 pt-6 pb-4 space-y-7 flex flex-col">
+      <div className="flex-1 max-w-6xl mx-auto w-full px-1 sm:px-3 md:px-5 pt-4 pb-2 sm:pt-6 sm:pb-4 space-y-4 sm:space-y-7 flex flex-col">
 
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 flex-shrink-0">
+        <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 flex-shrink-0">
 
           {/* Beaker: shows c1-locked dots, converts dark-blue → red during sim */}
           <Beaker
@@ -112,7 +112,7 @@ const displayB =
 
         </div>
 
-        <div className="grid grid-cols-2 gap-2 sm:gap-4 flex-shrink-0">
+        <div className="grid grid-cols-2 gap-1 sm:gap-2 md:gap-4 flex-shrink-0">
 
           <FormulaPanel step={step} c1={c1} t1={t1} c2={c2} t2={t2} />
 

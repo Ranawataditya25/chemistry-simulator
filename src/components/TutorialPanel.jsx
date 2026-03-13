@@ -134,7 +134,7 @@ export default function TutorialPanel({
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 flex flex-col justify-between min-h-[350px]">
+    <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 flex flex-col justify-between min-h-[250px] sm:min-h-[350px]">
       {/* Speech bubble */}
       <div className="flex items-start gap-3">
         <div className="relative bg-gray-100 rounded-2xl p-6 flex-1 text-black text-sm sm:text-lg leading-relaxed">

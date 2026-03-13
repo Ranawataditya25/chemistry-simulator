@@ -111,10 +111,10 @@ for (let i = 0; i < darkBluePool.length; i++) {
   const labelA = Math.min(Math.max(A, 0), FIXED_MAX);
 
   return (
-    <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 flex flex-col items-center min-h-[350px]">
+    <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 flex flex-col items-center min-h-[250px] sm:min-h-[350px]">
       <h2 className="font-semibold text-gray-700 mb-1 text-sm sm:text-base">Beaker</h2>
 
-      <svg viewBox="0 0 120 160" className="w-44 h-60 sm:w-48 sm:h-64">
+      <svg viewBox="0 0 120 160" className="w-32 h-40 sm:w-44 sm:h-60 md:w-48 md:h-64">
         <path
           d="M 20 10 L 20 140 Q 20 150 30 150 L 90 150 Q 100 150 100 140 L 100 10"
           fill="none"

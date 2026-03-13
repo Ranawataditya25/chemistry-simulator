@@ -62,7 +62,7 @@ export default function FormulaPanel({
   const showLaw = step >= 4;
 
   return (
-    <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 space-y-4 overflow-x-auto text-[17px] min-h-[350px]">
+    <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 space-y-4 overflow-x-auto text-[17px] min-h-[250px] sm:min-h-[350px]">
       {/* ── Row 1: Main equation + inline boxes ─────────────────── */}
       {/* Line 1a: LaTeX main formula */}
       <div className="text-left">

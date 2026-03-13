@@ -24,12 +24,12 @@ export default function ConcentrationBars({ A, B }) {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 flex flex-col items-center min-h-[350px]">
+    <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 flex flex-col items-center min-h-[250px] sm:min-h-[350px]">
       <h2 className="font-semibold text-gray-700 mb-2 text-sm sm:text-base text-center">
         Concentrations
       </h2>
 
-      <div className="w-full h-[200px] sm:h-[220px] mt-10">
+      <div className="w-full h-[150px] sm:h-[200px] md:h-[220px] mt-10">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 8, right: 24, bottom: 20, left: -10 }} barSize={44}>
             <XAxis dataKey="name" tick={<CustomTick />} axisLine={false} tickLine={false} interval={0} />
