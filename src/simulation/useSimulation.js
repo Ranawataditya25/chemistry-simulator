@@ -31,12 +31,12 @@ export default function useSimulation() {
   }, []);
 
   // startWith(a0): begin simulation using provided initial concentration
-  const startWith = useCallback((a0 = 0.8, k = 0.08, tEnd = 10) => {
+  const startWith = useCallback((a0 = 0.8, k = 0.08, tStart = 0, tEnd = 10) => {
     clearInterval(intervalRef.current);
     a0Ref.current = a0;
 
     setFinished(false);
-    setTime(0);
+    setTime(tStart);
     setA(a0);
     setB(0);
     setRunning(true);
@@ -44,7 +44,7 @@ export default function useSimulation() {
     intervalRef.current = setInterval(() => {
       setTime(prev => {
         const newTime = parseFloat((prev + 0.1).toFixed(2));
-        const { A: newA, B: newB } = calculateZeroOrder({ A0: a0, k, time: newTime });
+        const { A: newA, B: newB } = calculateZeroOrder({ A0: a0, k, time: newTime - tStart });
         setA(newA);
         setB(newB);
 

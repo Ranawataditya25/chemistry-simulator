@@ -12,6 +12,7 @@ import {
   YAxis,
   ResponsiveContainer,
   ReferenceDot,
+  ReferenceLine,
   CartesianGrid,
 } from "recharts";
 
@@ -87,15 +88,15 @@ export default function ReactionGraph({
 
   useEffect(() => {
     if (running && !wasRunning.current) {
-      setTrace([{ time: 0, A: c1, B: 0 }]);
+      setTrace([{ time: t1, A: c1, B: 0 }]);
     }
     wasRunning.current = running;
-  }, [running, c1]);
+  }, [running, c1, t1]);
 
   useEffect(() => {
     if (!running || simA === undefined) return;
     const k = t2 - t1 !== 0 ? Math.abs((c2 - c1) / (t2 - t1)) : 0.0001;
-    const elapsed = parseFloat(((c1 - Math.max(simA, 0)) / k).toFixed(1));
+    const elapsed = t1 + parseFloat(((c1 - Math.max(simA, 0)) / k).toFixed(1));
     setTrace((prev) => {
       const last = prev[prev.length - 1];
       if (last?.time === elapsed) return prev;
@@ -122,7 +123,7 @@ export default function ReactionGraph({
     { time: t2, A: c2, B: c1 - c2 },
   ];
 
-  const chartData = showSim ? trace : showLines ? staticData : [];
+  const chartData = showSim ? trace : showLines ? staticData : [{ time: t1, A: c1, B: 0 }];
 
   // Controls are only active at their respective step; frozen after that
   const isStep0 = step === 0;
@@ -174,7 +175,7 @@ export default function ReactionGraph({
   else if (step === 1)
     settingLabel = `c₂ = ${c2.toFixed(2)} M, t₂ = ${t2.toFixed(1)} s`;
   else if (running)
-    settingLabel = `[A] = ${(simA ?? c1).toFixed(3)} M, t = ${((c1 - (simA ?? c1)) / Math.abs((c2 - c1) / (t2 - t1))).toFixed(1)} s`;
+    settingLabel = `[A] = ${(simA ?? c1).toFixed(3)} M, t = ${(t1 + (c1 - (simA ?? c1)) / Math.abs((c2 - c1) / (t2 - t1))).toFixed(1)} s`;
   else settingLabel = `c₁ = ${c1.toFixed(2)} M → c₂ = ${c2.toFixed(2)} M`;
 
   // Time display for X control row
@@ -291,14 +292,26 @@ export default function ReactionGraph({
 
               {/* Step 0: dot at (t1, c1) */}
               {step === 0 && (
-                <ReferenceDot
-                  x={t1}
-                  y={c1}
-                  r={5}
-                  fill="#3b82f6"
-                  stroke="white"
-                  strokeWidth={1.5}
-                />
+                <>
+                  <Line
+                    dataKey="A"
+                    stroke="transparent"
+                    dot={<circle r={5} fill="#3b82f6" stroke="white" strokeWidth={1.5} />}
+                    activeDot={false}
+                  />
+                  <ReferenceLine
+                    x={t1}
+                    stroke="#ea580c"
+                    strokeDasharray="5 5"
+                    strokeWidth={2}
+                  />
+                  <ReferenceLine
+                    y={c1}
+                    stroke="#ea580c"
+                    strokeDasharray="5 5"
+                    strokeWidth={2}
+                  />
+                </>
               )}
 
               {/* Steps 1+: A and B lines */}

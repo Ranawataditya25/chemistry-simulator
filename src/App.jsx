@@ -63,11 +63,11 @@ const displayB =
 
   const handleStartSim = () => {
     setStep(5);
-    sim.startWith(c1, k, t2);
+    sim.startWith(c1, k, t1, t2);
   };
 
   const handleReplay = () => {
-  sim.startWith(c1, k, t2);
+  sim.startWith(c1, k, t1, t2);
 };
 
   const handleSetStep = (s) => {
