@@ -134,10 +134,10 @@ export default function TutorialPanel({
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 flex flex-col justify-between min-h-[250px] sm:min-h-[350px]">
+    <div className="bg-white rounded-2xl shadow-md p-2 sm:p-4 md:p-5 flex flex-col justify-between min-h-[200px] sm:min-h-[250px] md:min-h-[350px]">
       {/* Speech bubble */}
-      <div className="flex items-start gap-3">
-        <div className="relative bg-gray-100 rounded-2xl p-6 flex-1 text-black text-sm sm:text-lg leading-relaxed">
+      <div className="flex items-start gap-1 sm:gap-2 md:gap-3">
+        <div className="relative bg-gray-100 rounded-2xl p-3 sm:p-4 md:p-6 flex-1 text-black text-xs sm:text-sm md:text-lg leading-relaxed">
           {STEPS[step]}
 
           <div
@@ -148,12 +148,12 @@ export default function TutorialPanel({
         </div>
 
         <div className="flex-shrink-0">
-          <img src={Mascot} className="w-30 h-40 sm:w-20 sm:h-40" />
+          <img src={Mascot} className="w-16 h-24 sm:w-20 sm:h-30 md:w-30 md:h-40" />
         </div>
       </div>
 
       {/* Navigation */}
-      <div className="flex items-center justify-between mt-5">
+      <div className="flex items-center justify-between mt-3 sm:mt-5">
         <ArrowBtn
           dir="left"
           onClick={handleBack}
@@ -186,7 +186,7 @@ export default function TutorialPanel({
           <button
             onClick={onStartSim}
             className="bg-orange-500 hover:bg-orange-600 text-white
-            px-5 py-2 rounded-full text-sm font-semibold flex items-center gap-1.5"
+            px-3 py-1 sm:px-5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-1.5"
           >
             Start Simulation
             <ArrowBtn dir="right" />
@@ -195,7 +195,7 @@ export default function TutorialPanel({
           <button
             onClick={onReplay}
             disabled={running}
-            className={`px-5 py-2 rounded-full text-sm font-semibold flex items-center gap-1.5
+            className={`px-3 py-1 sm:px-5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-1.5
   ${
     running
       ? "bg-gray-300 text-gray-500 cursor-not-allowed"
@@ -210,7 +210,7 @@ export default function TutorialPanel({
           <button
             onClick={handleNext}
             className="bg-orange-500 hover:bg-orange-600 text-white
-            px-5 py-2 rounded-full text-sm font-semibold flex items-center gap-1.5"
+            px-3 py-1 sm:px-5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-1.5"
           >
             Next
             <ArrowBtn dir="right" />

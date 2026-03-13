@@ -13,7 +13,7 @@ const K_FIXED = 0.08;
 function Box({ value, orange = false }) {
   return (
     <span
-      className={`inline-block border-2 border-dashed rounded px-1.5 py-0.5 mx-0.5 text-sm font-mono align-middle whitespace-nowrap
+      className={`inline-block border-2 border-dashed rounded px-1 py-0.5 mx-0.5 text-xs sm:text-sm font-mono align-middle whitespace-nowrap
         ${
           orange
             ? "border-orange-400 text-orange-500 bg-orange-50"
@@ -28,7 +28,7 @@ function Box({ value, orange = false }) {
 // Inline stacked fraction (num over den)
 function Frac({ num, den }) {
   return (
-    <span className="inline-flex flex-col items-center align-middle mx-0.5 text-sm leading-tight">
+    <span className="inline-flex flex-col items-center align-middle mx-0.5 text-xs sm:text-sm leading-tight">
       <span className="border-b border-gray-500 px-1.5 text-center whitespace-nowrap">
         {num}
       </span>
@@ -62,7 +62,7 @@ export default function FormulaPanel({
   const showLaw = step >= 4;
 
   return (
-    <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 space-y-4 overflow-x-auto text-[17px] min-h-[250px] sm:min-h-[350px]">
+    <div className="bg-white rounded-2xl shadow-md p-2 sm:p-4 md:p-5 space-y-2 sm:space-y-4 overflow-x-auto text-xs sm:text-sm md:text-[17px] min-h-[200px] sm:min-h-[250px] md:min-h-[350px]">
       {/* ── Row 1: Main equation + inline boxes ─────────────────── */}
       {/* Line 1a: LaTeX main formula */}
       <div className="text-left">
@@ -72,7 +72,7 @@ export default function FormulaPanel({
       </div>
 
       {/* Line 1b: filled-in numeric row */}
-      <div className="flex items-center gap-x-1 text-xl whitespace-nowrap">
+      <div className="flex items-center gap-x-1 text-lg sm:text-xl whitespace-nowrap">
         <span>Rate =</span>
         {showK ? <Box value={k.toFixed(3)} /> : <Box value="?" orange />}
         <span>= −</span>
@@ -111,7 +111,7 @@ export default function FormulaPanel({
       </div>
       {/* Line 2b: expanded values (when revealed) */}
       {showHalf && (
-        <div className="flex items-center gap-1 text-gray-700 text-sm -mt-2 whitespace-nowrap">
+        <div className="flex items-center gap-1 text-gray-700 text-xs sm:text-sm -mt-2 whitespace-nowrap">
           <Box value={half.toFixed(2)} />
           <span>=</span>
           <Box value={c1.toFixed(2)} />
@@ -129,7 +129,7 @@ export default function FormulaPanel({
       </div>
       {/* Line 3b: expanded values (when revealed) */}
       {showLaw && (
-        <div className="flex items-center gap-1 text-gray-700 text-sm -mt-2 whitespace-nowrap">
+        <div className="flex items-center gap-1 text-gray-700 text-xs sm:text-sm -mt-2 whitespace-nowrap">
           <Box value={k.toFixed(3)} />
           <span>=</span>
           <Box value={k.toFixed(3)} />

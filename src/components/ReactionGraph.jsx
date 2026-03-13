@@ -232,7 +232,7 @@ export default function ReactionGraph({
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 flex flex-col min-h-[250px] sm:min-h-[350px]">
+    <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 flex flex-col min-h-[200px] sm:min-h-[250px] md:min-h-[350px]">
       <h2 className="font-semibold text-gray-700 mb-1 text-sm sm:text-base text-center">
         Concentration vs Time
       </h2>
@@ -260,7 +260,7 @@ export default function ReactionGraph({
         </div>
 
         {/* Recharts */}
-        <div className="flex-1 h-[100px] sm:h-[140px] md:h-[200px]">
+        <div className="flex-1 h-[80px] sm:h-[100px] md:h-[140px] lg:h-[200px]">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={chartData}
